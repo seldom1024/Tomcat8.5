@@ -164,6 +164,14 @@ public class StringManager {
             value = key;
         }
 
+        /**解决乱码**/
+        try {
+            value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /**解决乱码**/
+
         MessageFormat mf = new MessageFormat(value);
         mf.setLocale(locale);
         return mf.format(args, new StringBuffer(), null).toString();
