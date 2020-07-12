@@ -16,6 +16,7 @@
  */
 package org.apache.jasper.compiler;
 
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -59,6 +60,13 @@ public class Localizer {
             }
         } catch (MissingResourceException e) {
         }
+        /**处理乱码**/
+        try {
+            errMsg = new String(errMsg.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /**处理乱码**/
         return errMsg;
     }
 
